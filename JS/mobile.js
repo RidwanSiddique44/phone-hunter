@@ -4,9 +4,13 @@ const loadData = () => {
     const searchValue = searchField.value;
     searchField.value = '';
     if (searchValue == '') {
-        document.getElementById('empty-string')
+        document.getElementById('empty-string').style.display = 'block';
+        document.getElementById('error-input').style.display = 'none';
+
     }
     else {
+        document.getElementById('error-input').style.display = 'none';
+        document.getElementById('empty-string').style.display = 'none';
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`
         fetch(url)
             .then(res => res.json())
@@ -18,13 +22,16 @@ const loadData = () => {
 }
 //-------------- Display Result Function -------------//
 const displayResult = (phones) => {
-    console.log(phones)
     const result = document.getElementById('display-result');
     result.textContent = '';
     if (phones.length == 0) {
-        console.log('error found')
+        document.getElementById('error-input').style.display = 'block';
+        document.getElementById('empty-string').style.display = 'none';
+
     }
     else {
+        document.getElementById('error-input').style.display = 'none';
+        document.getElementById('empty-string').style.display = 'none';
         phones.forEach(phone => {
             const div = document.createElement('div');
             div.classList.add('col');
@@ -53,7 +60,6 @@ const loadDetails = id => {
 }
 //-------------- Details Result Function -------------//
 const displayDitails = info => {
-    console.log(info)
     const details = document.getElementById('details-output');
     details.textContent = '';
     const releaseDate = info.releaseDate;
@@ -63,7 +69,7 @@ const displayDitails = info => {
         const [a, b, c, d, e, f, g] = sensors;
         const div = document.createElement('div');
         div.classList.add('col');
-        div.innerHTML = `<div class="card border border-danger rounded shadow-lg p-3 mb-5 bg-body rounded">
+        div.innerHTML = `<div class="card border border-info rounded shadow-lg p-3 mb-5 bg-body rounded">
     <img src="${info.image}" class="card-img-top img-fluid p-md-5 w-50" alt="...">
         <div class="card-body">
           <h4 class="card-title fw-bolder">${info.name}</h4>

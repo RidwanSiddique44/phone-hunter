@@ -1,3 +1,16 @@
+/*----------- Google Font link ------------*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+/*------------- body style ---------------*/
+body{
+    margin: 30px;
+    font-family: 'Roboto Slab', serif;
+    background-color: rgb(229, 248, 244);
+}
+/*---------- error handler style ---------*/
 #empty-string{
+    display: none;
+}
+#error-input{
     display: none;
 }
