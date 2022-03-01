@@ -12,7 +12,7 @@ const loadData = () => {
 //-------------- Display Result Function -------------//
 const displayResult = (phones) => {
     const result = document.getElementById('display-result');
-
+    result.textContent = '';
     phones.forEach(phone => {
         const div = document.createElement('div');
         div.classList.add('col');
@@ -29,6 +29,7 @@ const displayResult = (phones) => {
     });
 
 }
+//-------------- Details Load Function -------------//
 const loadDetails = id => {
     const url = ` https://openapi.programming-hero.com/api/phone/${id}`
     fetch(url)
@@ -36,16 +37,41 @@ const loadDetails = id => {
         .then(data => displayDitails(data.data))
 
 }
+//-------------- Details Result Function -------------//
 const displayDitails = info => {
-    console.log(info)
-    const result = document.getElementById('display-details');
-    const div = document.createElement('div');
-    div.classList.add('card');
-    div.innerHTML = `<img src="${info.image}" class="card-img-top" alt="...">
+    // console.log(info)
+    const details = document.getElementById('details-output');
+    details.textContent = '';
+    const releaseDate = info.releaseDate;
+
+    const displayInfo = (date) => {
+        const div = document.createElement('div');
+        div.classList.add('col');
+        div.innerHTML = `<div class="card border border-danger rounded shadow-lg p-3 mb-5 bg-body rounded">
+    <img src="${info.image}" class="card-img-top img-fluid p-md-5 w-50" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>`
-    result.appendChild(div);
+          <h5 class="card-title">${info.name}</h5>
+          <h6 class="card-title">${date}</h6>
+          <p class="card-text">Storage:${info.mainFeatures.storage}</p>
+          <p class="card-text">Display size:${info.mainFeatures.displaySize}</p>
+          <p class="card-text">${info.mainFeatures.chipSet}</p>
+          
+
+        </div>
+        </div>`;
+
+        details.appendChild(div);
+    }
+    if (releaseDate == '') {
+        const date = 'No release date found';
+        displayInfo(date);
+
+
+    }
+    else {
+        const date = releaseDate;
+        displayInfo(date);
+
+    }
 
 }
