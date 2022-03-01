@@ -40,7 +40,7 @@ const displayResult = (phones) => {
                 <div class="card-body">
                     <h5 class="card-title px-5">${phone.brand}</h5>
                     <p class="card-text px-5">${phone.phone_name}</p>
-                    <button onclick="loadDetails('${phone.slug}')" type="button" class="btn btn-info px-5 mx-5 w-75 text-light fw-bold">Details</button>
+                    <a href="#details-output" onclick="loadDetails('${phone.slug}')"  class="btn btn-info px-5 mx-5 w-75 text-light fw-bold">Details</a>
                 </div>
             </div>`
             result.appendChild(div);
